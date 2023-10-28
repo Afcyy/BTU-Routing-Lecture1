@@ -16,10 +16,10 @@ use App\Models\Quiz;
 |
 */
 
-Route::get('/', [QuizController::class, 'index']);
+Route::get('/', [QuizController::class, 'index'])->name('index');
 
-Route::get('quiz/edit/{id}', [QuizController::class, 'edit']);
-Route::put('quiz/edit/{id}', [QuizController::class, 'update']);
+Route::get('quiz/edit/{quiz?}', [QuizController::class, 'edit'])->name('quiz.edit');
+Route::put('quiz/edit/{quiz?}', [QuizController::class, 'createOrUpdate'])->name('quiz.createOrUpdate');
 
 Route::put('/subscribe', function (Request $request) {
    dd($request->email . " Subscribed!");

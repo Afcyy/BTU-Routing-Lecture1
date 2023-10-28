@@ -8,7 +8,7 @@
 @section('content')
 
     <div class="container">
-        <form action="{{ '/quiz/edit/' . $id }}" method="POST">
+        <form action="{{ route('quiz.createOrUpdate', $quiz) }}" method="POST">
             @csrf
             @method('PUT')
 

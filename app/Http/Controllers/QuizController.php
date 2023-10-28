@@ -15,39 +15,13 @@ class QuizController extends Controller
         return view('welcome', compact('quizzes'));
     }
 
-    public function create()
-    {
-        //
+    public function createOrUpdate(Quiz $quiz, Request $request) {
+        $quiz->fill($request->all())->save();
+        return redirect()->route('index');
     }
 
-    public function store(Request $request)
+    public function edit(Quiz $quiz)
     {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        $quiz = Quiz::find($id);
-
-        return view('form', compact('quiz', 'id'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        Quiz::updateOrCreate([
-            'id' => $id
-        ], $request->all());
-
-        return redirect('/');
-    }
-
-    public function destroy($id)
-    {
-        //
+        return view('form', compact('quiz'));
     }
 }
