@@ -18,9 +18,6 @@ use App\Models\Quiz;
 
 Route::get('/', [QuizController::class, 'index']);
 
-Route::get('quiz/create', [QuizController::class, 'create']);
-Route::post('quiz/create', [QuizController::class, 'store']);
-
 Route::get('quiz/edit/{id}', [QuizController::class, 'edit']);
 Route::put('quiz/edit/{id}', [QuizController::class, 'update']);
 
