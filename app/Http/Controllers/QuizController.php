@@ -17,14 +17,12 @@ class QuizController extends Controller
 
     public function create()
     {
-        return view('form');
+        //
     }
 
     public function store(Request $request)
     {
-        Quiz::create($request->all());
-
-        return redirect('/');
+        //
     }
 
     public function show($id)
@@ -36,16 +34,14 @@ class QuizController extends Controller
     {
         $quiz = Quiz::find($id);
 
-        if(!$quiz) {
-            return redirect('/quiz/create');
-        }
-
-        return view('form', compact('quiz'));
+        return view('form', compact('quiz', 'id'));
     }
 
     public function update(Request $request, $id)
     {
-        Quiz::find($id)->update($request->all());
+        Quiz::updateOrCreate([
+            'id' => $id
+        ], $request->all());
 
         return redirect('/');
     }

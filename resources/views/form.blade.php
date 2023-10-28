@@ -8,11 +8,10 @@
 @section('content')
 
     <div class="container">
-        <form action="{{ isset($quiz) ? '/quiz/edit/' . $quiz->id : '/quiz/create' }}" method="POST">
+        <form action="{{ '/quiz/edit/' . $id }}" method="POST">
             @csrf
-            @if(isset($quiz))
-                @method('PUT')
-            @endif
+            @method('PUT')
+
             <div class="form-group">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
