@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuizController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Quiz;
@@ -15,11 +16,13 @@ use App\Models\Quiz;
 |
 */
 
-Route::get('/', function () {
-    $quizzes = Quiz::all();
+Route::get('/', [QuizController::class, 'index']);
 
-    return view('welcome', compact('quizzes'));
-});
+Route::get('quiz/create', [QuizController::class, 'create']);
+Route::post('quiz/create', [QuizController::class, 'store']);
+
+Route::get('quiz/edit/{id}', [QuizController::class, 'edit']);
+Route::put('quiz/edit/{id}', [QuizController::class, 'update']);
 
 Route::put('/subscribe', function (Request $request) {
    dd($request->email . " Subscribed!");
