@@ -8,15 +8,18 @@
 @section('content')
 
     <div class="container">
-        @foreach($quizzes as $quiz)
-            <div class="card" style="width: 18rem;">
-                <img src="{{ $quiz['img'] }}" class="card-img-top" alt="{{ 'Cover photo of' . $quiz['name'] }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $quiz['name'] }}</h5>
-                    <button @class(['btn', 'btn-success' => $quiz['status'] == 'Passed', 'btn-danger' => $quiz['status'] == 'Failed', 'btn-primary' => $quiz['status'] == 'Upcoming'])>{{ $quiz['status'] }}</button>
+        <div class="row row-cols-3">
+            @foreach($quizzes as $quiz)
+                <div class="card mt-5" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ $quiz->name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Due {{ $quiz->deadline }}</h6>
+                    <p class="card-text">{{ $quiz->description }}</p>
+                    <p class="card-link fw-bold">Max score: <span class="fw-normal">{{ $quiz->score }}<span></p>
+                  </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 
 @endsection
