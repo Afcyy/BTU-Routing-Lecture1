@@ -10,13 +10,22 @@ class QuizController extends Controller
 {
     public function index(): View
     {
-        $quizzes = Quiz::all();
+        $quizzes = Quiz::where('status', 'active')
+            ->where(function ($query) {
+                $query->whereNotNull('image')
+                    ->orWhereNotNull('description');
+            })
+            ->orderByRaw('IF(image IS NOT NULL, 0, 1)')
+            ->orderByDesc('created_at')
+            ->take(8)
+            ->get();
 
         return view('welcome', compact('quizzes'));
     }
 
     public function createOrUpdate(Quiz $quiz, Request $request) {
         $quiz->fill($request->all())->save();
+
         return redirect()->route('index');
     }
 
