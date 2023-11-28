@@ -15,7 +15,8 @@
                     <h5 class="card-title">{{ $quiz->name }}</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Due {{ $quiz->deadline }}</h6>
                     <p class="card-text">{{ $quiz->description }}</p>
-                    <p class="card-link fw-bold">Max score: <span class="fw-normal">{{ $quiz->score }}<span></p>
+                    <a class="badge bg-primary text-wrap fw-bold mx-4">Max score: <span class="fw-normal">{{ $quiz->score }}</span></a>
+                    <a href="{{ route('quiz.edit', $quiz) }}" class="card-link">Edit</a>
                   </div>
                 </div>
             @endforeach
