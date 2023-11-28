@@ -25,6 +25,36 @@ class QuizFactory extends Factory
             'description' => fake()->text(),
             'score' => fake()->numberBetween(1,10),
             'deadline' => fake()->date(),
+            'status' => 'active',
+            'image' => fake()->imageUrl(),
+            'created_at' => fake()->date()
         ];
+    }
+
+    public function notActive(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => 'not_active'
+            ];
+        });
+    }
+
+    public function withoutDescription(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'description' => null,
+            ];
+        });
+    }
+
+    public function withoutImage(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'image' => null
+            ];
+        });
     }
 }

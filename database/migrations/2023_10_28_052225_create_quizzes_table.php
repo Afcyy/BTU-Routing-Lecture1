@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->integer('score');
             $table->date('deadline');
             $table->timestamps();
