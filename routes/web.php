@@ -21,6 +21,8 @@ Route::get('/', [QuizController::class, 'index'])->name('index');
 Route::get('quiz/edit/{quiz?}', [QuizController::class, 'edit'])->name('quiz.edit');
 Route::put('quiz/edit/{quiz?}', [QuizController::class, 'createOrUpdate'])->name('quiz.createOrUpdate');
 
+Route::view('error', 'error')->name('error');
+
 Route::put('/subscribe', function (Request $request) {
    dd($request->email . " Subscribed!");
-});
+})->middleware('my-super-middleware');
