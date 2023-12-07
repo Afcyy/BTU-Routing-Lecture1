@@ -16,6 +16,18 @@ class QuizSeeder extends Seeder
     public function run()
     {
         Quiz::factory()
+            ->notActive()
+            ->create();
+
+        Quiz::factory()
+            ->withoutDescription()
+            ->create();
+
+        Quiz::factory()
+            ->withoutImage()
+            ->create();
+
+        Quiz::factory()
             ->count(5)
             ->create();
     }
