@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quizzes', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('description')->nullable();
-            $table->longText('image')->nullable();
-            $table->enum('status', ['active', 'not_active'])->default('not_active');
-            $table->foreignId('user_id');
+            $table->foreignId('quiz_id');
+            $table->string('text');
+            $table->string('image');
+            $table->string('answer_1');
+            $table->string('answer_2');
+            $table->string('answer_3');
+            $table->string('answer_4');
+            $table->string('correct_answer');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quizzes');
+        Schema::dropIfExists('questions');
     }
 };

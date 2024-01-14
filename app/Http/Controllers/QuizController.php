@@ -10,7 +10,8 @@ class QuizController extends Controller
 {
     public function index(): View
     {
-        $quizzes = Quiz::where('status', 'active')
+        $quizzes = Quiz::withCount('questions')
+        ->where('status', 'active')
             ->where(function ($query) {
                 $query->whereNotNull('image')
                     ->orWhereNotNull('description');
@@ -20,17 +21,43 @@ class QuizController extends Controller
             ->take(8)
             ->get();
 
-        return view('welcome', compact('quizzes'));
+        return view('quiz.index', compact('quizzes'));
     }
 
-    public function createOrUpdate(Quiz $quiz, Request $request) {
-        $quiz->fill($request->all())->save();
+    public function store(Request $request) {
+        $quiz = auth()->user()->quiz()->create($request->only(['name', 'description', 'image']));
+
+        foreach($request->questions as $question) {
+            $quiz->questions()->create([
+                'text' => $question['text'],
+                'image' => $question['image'],
+                'answer_1' => $question['answers'][0],
+                'answer_2' => $question['answers'][1],
+                'answer_3' => $question['answers'][2],
+                'answer_4' => $question['answers'][3],
+                'correct_answer' => $question['correct_answer']
+            ]);
+        };
 
         return redirect()->route('index');
     }
 
     public function edit(Quiz $quiz)
     {
-        return view('form', compact('quiz'));
+        return view('quiz.store', compact('quiz'));
+    }
+
+    public function show(Quiz $quiz)
+    {
+        return view('quiz.show', compact('quiz'));
+    }
+
+    public function destroy(Quiz $quiz)
+    {
+        if(in_array(auth()->id(), [$quiz->user->id, 1])){
+            $quiz->delete();
+        }
+
+        return redirect(route('index'));
     }
 }
