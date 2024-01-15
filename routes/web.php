@@ -24,6 +24,7 @@ Route::get('quiz/edit/{quiz?}', [QuizController::class, 'edit'])->name('quiz.edi
 Route::put('quiz/edit/{quiz?}', [QuizController::class, 'store'])->name('quiz.store');
 Route::get('quiz/show/{quiz}', [QuizController::class, 'show'])->name('quiz.show');
 Route::delete('quiz/destroy/{quiz}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+Route::get('quiz/take/{quiz}', [QuizController::class, 'take'])->name('quiz.take');
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');

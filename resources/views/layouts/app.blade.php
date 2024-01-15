@@ -12,6 +12,7 @@
 {{--    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>--}}
 
     @stack("styles")
+    <livewire:styles />
 </head>
 <body class="antialiased">
     <div class="container">
@@ -27,7 +28,7 @@
                         <p class="text-sm  text-gray-500">{{ auth()->user()->name }}</p>
                         <a href="{{ route('quiz.store') }}" class="text-sm bg-blue-600 text-white p-2 rounded-md">Create New Quiz</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-blue-600">Sing in</a>
+                        <a href="{{ route('login') }}" class="text-sm text-blue-600">Sign in</a>
                         <a href="{{ route('register') }}" class="text-sm bg-blue-600 text-white p-2 rounded-md">Sing up</a>
                     @endif
                 </div>
@@ -48,5 +49,7 @@
             </form>
         </footer>
     </div>
+
+    <livewire:scripts />
 </body>
 </html>

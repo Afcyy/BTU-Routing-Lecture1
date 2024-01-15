@@ -28,7 +28,9 @@
                 <p class="lead">{{ $quiz->description }}</p>
                 <figure><img class="w-full" src="{{ $quiz->image }}" alt=""></figure>
 
-                <button class="bg-blue-500 text-white font-medium p-2 rounded-md w-full mt-6">Start Quiz</button>
+                <a href="{{ route('quiz.take', $quiz->id) }}">
+                    <button class="bg-blue-500 text-white font-medium p-2 rounded-md w-full mt-6">Start Quiz</button>
+                </a>
                 @if(in_array(auth()->id(), [$quiz->user->id, 1]))
                     <form action="{{ route('quiz.destroy', $quiz) }}", method="POST">
                         @csrf

@@ -60,4 +60,9 @@ class QuizController extends Controller
 
         return redirect(route('index'));
     }
+
+    public function take(Quiz $quiz)
+    {
+        return view('quiz.take', compact('quiz'));
+    }
 }
